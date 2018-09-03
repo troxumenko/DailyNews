@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true"
+    tools:context=".SettingsActivity">
+
+    <ImageView
+        android:layout_width="@dimen/example_size"
+        android:layout_height="@dimen/example_size"
+        android:layout_gravity="center"
+        android:contentDescription="@string/menu_item_settings"
+        android:src="@drawable/ic_menu_settings"
+        android:tint="@color/color_white" />
+
+
+</FrameLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_news"
+            android:icon="@drawable/ic_menu_all_news"
+            android:title="@string/menu_item_all_news" />
+    </group>
+    <item android:title="@string/menu_item_categories">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_technology"
+                    android:icon="@drawable/ic_menu_technology"
+                    android:title="@string/menu_item_technology" />
+                <item
+                    android:id="@+id/nav_business"
+                    android:icon="@drawable/ic_menu_business"
+                    android:title="@string/menu_item_business" />
+                <item
+                    android:id="@+id/nav_sports"
+                    android:icon="@drawable/ic_menu_sports"
+                    android:title="@string/menu_item_sports" />
+                <item
+                    android:id="@+id/nav_entertainment"
+                    android:icon="@drawable/ic_menu_entertainment"
+                    android:title="@string/menu_item_entertainment" />
+                <item
+                    android:id="@+id/nav_health"
+                    android:icon="@drawable/ic_menu_health"
+                    android:title="@string/menu_item_health" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_item_other">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="@string/menu_item_settings" />
+        </menu>
+    </item>
+
+</menu>
