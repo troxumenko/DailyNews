@@ -16,8 +16,13 @@
     <string name="menu_item_business">Бізнес</string>
     <string name="menu_item_other">Інше</string>
     <string name="menu_item_settings">Налаштування</string>
-    <!-- menu items end -->
 
+    <!-- detail activity -->
     <string name="source_name">Daily News by troxumenko</string>
     <string name="read_source_button">Читати повністю</string>
-    </resources>
+
+    <!-- settings activity -->
+    <string name="settings_activity_notification_status">Відправити оповіщення</string>
+    <string name="setting_activity_notification_title">Оповіщення</string>
+
+</resources>

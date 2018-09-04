@@ -7,13 +7,56 @@
     android:fitsSystemWindows="true"
     tools:context=".SettingsActivity">
 
-    <ImageView
-        android:layout_width="@dimen/example_size"
-        android:layout_height="@dimen/example_size"
-        android:layout_gravity="center"
-        android:contentDescription="@string/menu_item_settings"
-        android:src="@drawable/ic_menu_settings"
-        android:tint="@color/color_white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:text="@string/setting_activity_notification_title"
+            android:textColor="@color/color_gray"
+            android:textSize="15sp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/notification_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onSettingNotification"
+                android:padding="12dp"
+                android:text="@string/settings_activity_notification_status"
+                android:textColor="@color/color_white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@color/colorPrimary" />
+
+    </LinearLayout>
 </FrameLayout>
