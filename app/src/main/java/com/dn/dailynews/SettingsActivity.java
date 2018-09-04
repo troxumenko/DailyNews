@@ -7,12 +7,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import java.util.Calendar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SettingsActivity extends AppCompatActivity {
+
+    @BindView(R.id.switch_settings_notification)
+    Switch notificationStatus;
 
     public static void startActivity(Activity activity) {
         activity.startActivity(new Intent(activity, SettingsActivity.class)/*, ActivityOptionsCompat.makeSceneTransitionAnimation(activity).toBundle()*/);
@@ -22,10 +28,30 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        ButterKnife.bind(this);
 
         getSupportActionBar().setTitle(R.string.menu_item_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        notificationStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(Calendar.HOUR_OF_DAY, 19);
+                    calendar.set(Calendar.MINUTE, 54);
+                    calendar.set(Calendar.SECOND, 59);
+
+                    Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                }
+            }
+        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -35,22 +61,5 @@ public class SettingsActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onSettingNotification(View view) {
-        Toast toast = Toast.makeText(getApplicationContext(), "Оповіщення буде отримано о 20:00", Toast.LENGTH_SHORT);
-        toast.show();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-
-        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 }

@@ -22,7 +22,7 @@
     <string name="read_source_button">Читати повністю</string>
 
     <!-- settings activity -->
-    <string name="settings_activity_notification_status">Відправити оповіщення</string>
+    <string name="settings_activity_notification_status">Вим./Увім. оповіщення</string>
     <string name="setting_activity_notification_title">Оповіщення</string>
 
 </resources>
