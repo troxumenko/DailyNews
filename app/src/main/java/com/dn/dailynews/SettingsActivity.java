@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -40,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (isChecked) {
                     Calendar calendar = Calendar.getInstance();
                     calendar.set(Calendar.HOUR_OF_DAY, 19);
-                    calendar.set(Calendar.MINUTE, 54);
+                    calendar.set(Calendar.MINUTE, 59);
                     calendar.set(Calendar.SECOND, 59);
 
                     Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
@@ -53,6 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

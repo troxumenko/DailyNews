@@ -18,16 +18,24 @@ import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
-    private List<Article> articles;
+    private List<Article> articles = new ArrayList<>();
     private Context context;
 
-    public ArticleAdapter(Context context, List<Article> articlesArrayList) {
+    public ArticleAdapter(Context context) {
         this.context = context;
-        this.articles = articlesArrayList;
+    }
+
+    public void setData(List<Article> list, boolean isRefresh) {
+        if(isRefresh) {
+            articles.clear();
+        }
+        articles.addAll(list);
+        notifyDataSetChanged();
     }
 
     @Override

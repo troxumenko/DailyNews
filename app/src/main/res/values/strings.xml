@@ -7,6 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
 
     <!-- menu items start -->
+    <string name="menu_item_world_news">Новини світу</string>
     <string name="menu_item_all_news">Всі новини</string>
     <string name="menu_item_categories">Категорії</string>
     <string name="menu_item_technology">Технології</string>
@@ -24,5 +25,7 @@
     <!-- settings activity -->
     <string name="settings_activity_notification_status">Вим./Увім. оповіщення</string>
     <string name="setting_activity_notification_title">Оповіщення</string>
+    <string name="search">Поиск</string>
+    <string name="edit_text_search">Поиск</string>
 
 </resources>
