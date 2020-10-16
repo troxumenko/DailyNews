@@ -1,11 +1,8 @@
 package com.dn.dailynews;
 
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +18,7 @@ import com.dn.dailynews.views.EntertainmentNewsView;
 import com.dn.dailynews.views.HealthNewsView;
 import com.dn.dailynews.views.SportNewsView;
 import com.dn.dailynews.views.TechnologyNewsView;
+import com.dn.dailynews.views.WorldNewsView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +26,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private WorldNewsView worldNewsView;
     private AllNewsView allNewsView;
     private TechnologyNewsView technologyNewsView;
     private SportNewsView sportNewsView;
@@ -69,7 +68,12 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_all_news) {
+        if (id == R.id.nav_world_news) {
+            mContainer.removeAllViews();
+            worldNewsView = worldNewsView != null ? worldNewsView : new WorldNewsView(this);
+            mContainer.addView(worldNewsView);
+
+        } else if (id == R.id.nav_all_news) {
             mContainer.removeAllViews();
             allNewsView = allNewsView != null ? allNewsView : new AllNewsView(this);
             mContainer.addView(allNewsView);
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.activity_main_menu_settings){
+        if (id == R.id.activity_main_menu_settings) {
             SettingsActivity.startActivity(this);
         }
         return true;

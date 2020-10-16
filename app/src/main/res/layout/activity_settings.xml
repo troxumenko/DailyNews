@@ -7,13 +7,61 @@
     android:fitsSystemWindows="true"
     tools:context=".SettingsActivity">
 
-    <ImageView
-        android:layout_width="@dimen/example_size"
-        android:layout_height="@dimen/example_size"
-        android:layout_gravity="center"
-        android:contentDescription="@string/menu_item_settings"
-        android:src="@drawable/ic_menu_settings"
-        android:tint="@color/color_white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="@string/setting_activity_notification_title"
+            android:textColor="@color/color_gray"
+            android:textSize="15sp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="6dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            android:weightSum="5">
+
+            <Switch
+                android:id="@+id/switch_settings_notification"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="6dp"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:layout_weight="4"
+                android:text="@string/settings_activity_notification_status"
+                android:textColor="@color/color_white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="6dp"
+            android:background="@color/colorPrimary" />
+
+    </LinearLayout>
 </FrameLayout>

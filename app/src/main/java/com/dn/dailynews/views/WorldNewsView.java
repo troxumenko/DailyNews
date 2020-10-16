@@ -8,6 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.dn.dailynews.R;
 import com.dn.dailynews.adapter.ArticleAdapter;
@@ -21,7 +26,7 @@ import butterknife.BindView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class AllNewsView extends BaseView {
+public class WorldNewsView extends BaseView {
 
     @BindView(R.id.swipe_container)
     SwipeRefreshLayout swipeContainer;
@@ -33,15 +38,15 @@ public class AllNewsView extends BaseView {
     private ArticleAdapter adapter;
     private OnScrollListener listener = new OnScrollListener();
 
-    public AllNewsView(@NonNull Context context) {
+    public WorldNewsView(@NonNull Context context) {
         this(context, null);
     }
 
-    public AllNewsView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public WorldNewsView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AllNewsView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WorldNewsView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         inflateView(R.layout.content_main);
         adapter = new ArticleAdapter(getContext());
@@ -75,7 +80,7 @@ public class AllNewsView extends BaseView {
         if (isLoading) return;
         isLoading = true;
         subscriptions.add(
-                apiService.getArticlesNews("ua", "", page, 5)
+                apiService.getArticlesWorldNews(page, 10, "Kotlin")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(answer -> {
@@ -84,9 +89,7 @@ public class AllNewsView extends BaseView {
                             swipeContainer.setRefreshing(false);
                             page++;
                             isLoading = false;
-                        }, throwable -> {
-                            Log.d("Error", throwable.getMessage());
-                        }));
+                        }, throwable -> Log.d("Error", throwable.getMessage())));
     }
 
     private class OnScrollListener extends RecyclerView.OnScrollListener {

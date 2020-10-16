@@ -28,6 +28,11 @@ public class HealthNewsView extends BaseView {
     @BindView(R.id.list_news)
     RecyclerView recyclerView;
 
+    private boolean isLoading = false;
+    private int page = 1;
+    private ArticleAdapter adapter;
+    private OnScrollListener listener = new OnScrollListener();
+
     public HealthNewsView(@NonNull Context context) {
         this(context, null);
     }
@@ -39,19 +44,21 @@ public class HealthNewsView extends BaseView {
     public HealthNewsView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         inflateView(R.layout.content_main);
+        adapter = new ArticleAdapter(getContext());
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-
-
+        recyclerView.addOnScrollListener(listener);
+        recyclerView.setAdapter(adapter);
         initArticles();
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_red_dark);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                page = 1;
                 loadJSON();
             }
         });
@@ -65,17 +72,33 @@ public class HealthNewsView extends BaseView {
 
     private void loadJSON() {
         Service apiService = Client.getClient();
+        if (isLoading) return;
+        isLoading = true;
         subscriptions.add(
-                apiService.getArticlesHealth()
+                apiService.getArticlesNews("ua", "health", page, 5)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(answer -> {
                             List<Article> articles = answer.getArticles();
-                            recyclerView.setAdapter(new ArticleAdapter(getContext(), articles));
-                            recyclerView.smoothScrollToPosition(0);
+                            adapter.setData(articles, false);
                             swipeContainer.setRefreshing(false);
+                            page++;
+                            isLoading = false;
                         }, throwable -> {
                             Log.d("Error", throwable.getMessage());
                         }));
+    }
+
+    private class OnScrollListener extends RecyclerView.OnScrollListener {
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            LinearLayoutManager mLayoutManager = LinearLayoutManager.class.cast(recyclerView.getLayoutManager());
+            int visibleItemCount = mLayoutManager.getChildCount();
+            int totalItemCount = mLayoutManager.getItemCount();
+            int pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
+            if (pastVisibleItems + visibleItemCount >= totalItemCount) {
+                loadJSON();
+            }
+        }
     }
 }

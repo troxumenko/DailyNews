@@ -93,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createShare();
-                startActivity(Intent.createChooser(createShare(), ""));
+                startActivity(Intent.createChooser(createShare(), "Виберіть отримувача..."));
             }
         });
     }
